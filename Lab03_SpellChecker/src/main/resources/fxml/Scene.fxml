@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.spellchecker.FXMLController">
    <top>
       <Label text="Lab03_SpellChecker" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -13,4 +17,31 @@
          </BorderPane.margin>
       </Label>
    </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Choose the language:" />
+                  <ComboBox fx:id="lingua" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <TextArea fx:id="testoDaCorreggere" prefHeight="200.0" prefWidth="200.0" promptText="Inserire testo da correggere" />
+            <Button fx:id="butCheck" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#controlloParole" text="Spell Check">
+               <VBox.margin>
+                  <Insets left="300.0" />
+               </VBox.margin>
+            </Button>
+            <Label text="Wrong words" />
+            <TextArea fx:id="txtRisultato" prefHeight="200.0" prefWidth="200.0" promptText="Parole Errate" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="txtErrori" text="Il testo contiene errori:" textFill="#d30909" />
+                  <Button fx:id="butClear" mnemonicParsing="false" onAction="#clearAll" text="Clear text" />
+               </children>
+            </HBox>
+            <Label fx:id="labSecondi" text="Spell check completed in -- seconds" />
+         </children>
+      </VBox>
+   </center>
 </BorderPane>
