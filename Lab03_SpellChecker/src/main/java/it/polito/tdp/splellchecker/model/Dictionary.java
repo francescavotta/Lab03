@@ -3,34 +3,46 @@ package it.polito.tdp.splellchecker.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+//import java.util.Set;
 
 public class Dictionary {
 
 	private String lingua;
-	private Set <String> dizionario;
+	private List <String> dizionario;
 
 	public Dictionary() {
-		this.lingua = null;
-		this.dizionario = new HashSet<String>();
+		//this.lingua = null;
+		//this.dizionario = new HashSet<String>();
 	}
 	
 	public void loadDictionary(String languages) {
-		String lingua = languages.toLowerCase();
+		if(dizionario!=null && this.lingua.equals(languages)) {
+			return;
+		}
+		
+		this.dizionario = new ArrayList<String>();
+		this.lingua = languages.toLowerCase();
+		
 		if(lingua.equals("english")) {
 			this.lingua = "english";
 			try {
 				FileReader fr = new FileReader("src/main/resources/English.txt");
 				BufferedReader br = new BufferedReader(fr);
 				String word;
+				
 				while((word= br.readLine())!=null) {
-					dizionario.add(word);
+					dizionario.add(word.toLowerCase());
 				}
+				
+				Collections.sort(dizionario);
+				
 				br.close();
+				System.out.print("Dizionario caricato");
 			}catch(IOException e) {
 				System.out.print("Errore lettura da file");
 				return;
@@ -45,6 +57,8 @@ public class Dictionary {
 				while((word= br.readLine())!=null) {
 					dizionario.add(word);
 				}
+				
+				Collections.sort(dizionario);
 				br.close();
 			}catch(IOException e) {
 				System.out.print("Errore lettura da file");
@@ -97,7 +111,7 @@ public class Dictionary {
 		for(String s: inputText) {
 			RichWord rw = new RichWord(s);
 			for(String d : this.dizionario) {
-				if(d.equals(s)) {
+				if(d.equals(s.toLowerCase())) {
 					rw.setCorrect(true);
 					break;
 				}else {
@@ -125,11 +139,11 @@ public class Dictionary {
 				int indiceMax= sottolista.size()-1;
 				int indice = ((indiceMax-indiceMin)/2);//+indiceMin;
 				String confronto = sottolista.get(indice);
-				if(s.equals(confronto))
+				if(s.compareToIgnoreCase(confronto)==0)
 				{
 					rw.setCorrect(true);
 					break;
-				}else if(s.compareTo(confronto)<0) {
+				}else if(s.compareToIgnoreCase(confronto)<0) {
 					sottolista = sottolista.subList(0, indice+1);
 					indiceMax = indice;
 				}else {

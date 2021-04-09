@@ -77,7 +77,7 @@ public class FXMLController {
     		parole.add(paroleSplit[i]);
     	}
     	long timeStart = System.nanoTime();
-    	List <RichWord> stampa = this.dizionario.spellCheckTestDichotomic(parole);
+    	List <RichWord> stampa = this.dizionario.spellCheckTest(parole);
     	long timeEnd = System.nanoTime();
 		float Millisecondi = ((timeEnd-timeStart)/1000000);
     	
